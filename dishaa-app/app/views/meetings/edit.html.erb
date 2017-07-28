@@ -1,0 +1,56 @@
+<% provide(:title, 'Meetings') %>
+<div class="header row">
+  <div class="col-xs-3 col-xs-offset-1">
+    <%= image_tag "dishaa_logo.png", class: "img-responsive minor-logo" %>
+  </div>
+  <div class="nav-1 col-xs-8">
+    <div class="welcome-text row">
+      Signed in as <%= @teacher.first_name + ' ' + (@teacher.last_name || "") %>
+    </div>
+    <div class="row text-right">
+        <%= link_to 'Go to homepage', "/teachers/#{@teacher.id}", method: :get %>
+        <%= link_to "Log Out", logout_path, method: :delete %>
+    </div>
+  </div>
+</div>
+<h1 class="text-center">Edit Meeting Schedule</h1>
+<%= form_tag("/teachers/#{@teacher.id}/meetings/edit") do %>
+  <div class="table-box center-block">
+    <% counter = 2 %>
+    <% @meetings.each do |m| %>
+      <%= fields_for "meetings[]", m do |mf| %>
+        <% if counter % 2 == 0 %>
+          <div class="row">
+        <% else %>
+          <div class="row table-row-dark">
+        <% end %>
+          <div class="col-lg-3">
+            <%= mf.label :date, "Meeting Date" %>
+            <%= mf.date_field :date, class: "form-control custom-select" %>
+          </div>
+          <div class="col-lg-2">
+            <%= mf.label :time, "Time" %>
+            <%= mf.text_field :time, class: "form-control custom-select" %>
+          </div>
+          <div class="col-lg-2">
+            <%= mf.label :venue, "Venue" %>
+            <%= mf.text_field :venue, class: "form-control custom-select" %>
+          </div>
+          <div class="col-lg-4">
+            <%= mf.label :agenda, "Agenda" %>
+            <%= mf.text_area :agenda, rows: 5, class: "form-control custom-textarea" %>
+          </div>
+          <div class="col-lg-1">
+            <%= link_to "Delete", "/teachers/#{@teacher.id}/meetings/#{m.id}/delete", method: :post, style: "font-size:1.75rem", class: "text-danger" %> 
+          </div>
+        </div>
+      <% end %>  
+      <% counter += 1 %>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-xs-6"><%= submit_tag "Save Changes", class: "btn btn-primary btn-submit" %></div>
+    <div class="col-xs-6"><%= link_to "Add Another Meeting", "/teachers/#{@teacher.id}/meetings/new", 
+      class: "btn btn-primary btn-submit" %></div>
+  </div>
+<% end %>

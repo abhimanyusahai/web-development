@@ -1,0 +1,58 @@
+<% provide(:title, 'Assessment') %>
+<div class="header row">
+  <div class="col-xs-3 col-xs-offset-1">
+    <%= image_tag "dishaa_logo.png", class: "img-responsive minor-logo" %>
+  </div>
+  <div class="nav-1 col-xs-8">
+    <div class="welcome-text row">
+      Signed in as <%= @teacher.first_name + ' ' + (@teacher.last_name || "") %>
+    </div>
+    <div class="row text-right">
+        <%= link_to 'Go to homepage', "/teachers/#{@teacher.id}", method: :get %>
+        <%= link_to "Log Out", logout_path, method: :delete %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <h1 class="text-center">Enter marks for <%= @student.first_name + ' ' + (@student.last_name || "") %></h1>
+</div>
+<%= form_tag("/teachers/#{@teacher.id}/assessment/marks/#{@student.id}") %>
+  <div class="row">
+    <div class="col-lg-5 col-lg-offset-1">
+      <%= label_tag :marks_date, "Exam Date" %>
+      <%= date_field :marks, :date, class: "form-control custom-select" %>
+    </div>  
+  </div>
+  <div class="row">
+    <div class="col-lg-5 col-lg-offset-1">
+      <%= label_tag :marks_subject_id, "Subject" %>
+      <%= collection_select :marks, :subject_id, @subjects, :id, :subject, { }, {class: "form-control custom-select"} %>
+    </div>
+    <div class="col-lg-5">
+      <%= label_tag :marks_exam_type_id, "Exam Type" %>
+      <%= collection_select :marks, :exam_type_id, @exam_types, :id, :exam_type, { }, {class: "form-control custom-select"} %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-5 col-lg-offset-1">
+      <%= label_tag :marks_marks_achieved, "Marks Achieved" %>
+      <%= text_field :marks, :marks_achieved, class: "form-control custom-select" %>
+    </div>
+    <div class="col-lg-5">
+      <%= label_tag :marks_max_marks, "Maximum Marks" %>
+      <%= text_field :marks, :max_marks, class: "form-control custom-select" %> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3"><%= submit_tag "Submit", class: "btn btn-primary btn-submit" %></div>
+  </div>
+<div class="row" style="margin-top:5%">
+  <div class="col-lg-offset-1">
+    <%= link_to "Enter ECA record for #{@student.first_name}", "/teachers/#{@teacher.id}/assessment/eca/#{@student.id}" %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-offset-1">
+    <%= link_to "Go back to list of all students", "/teachers/#{@teacher.id}/assessment" %>
+  </div>
+</div>
