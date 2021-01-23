@@ -1,0 +1,28 @@
+<% provide(:title, 'Meetings') %>
+<div class="header row">
+  <div class="col-xs-3 col-xs-offset-1">
+    <%= image_tag "dishaa_logo.png", class: "img-responsive minor-logo" %>
+  </div>
+  <div class="nav-1 col-xs-8">
+    <div class="welcome-text row">
+      Signed in as <%= @teacher.first_name + ' ' + (@teacher.last_name || "") %>
+    </div>
+    <div class="row text-right">
+        <%= link_to 'Go to homepage', "/teachers/#{@teacher.id}", method: :get %>
+        <%= link_to "Log Out", logout_path, method: :delete %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <h1 class="text-center">
+    <div class="row">
+      Meeting schedule successfully edited
+    </div>
+    <div class="row">
+      <%= link_to 'Edit again', "/teachers/#{@teacher.id}/meetings/edit", method: :get, style: "padding-left:2%;" %>
+    </div>
+    <div class="row">
+      <%= link_to 'View schedule', "/teachers/#{@teacher.id}/meetings", method: :get, style: "padding-left:2%;" %>
+    </div>
+  </h1>
+</div>

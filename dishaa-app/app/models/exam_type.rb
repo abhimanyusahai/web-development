@@ -1,0 +1,2 @@
+class ExamType < ApplicationRecord
+end

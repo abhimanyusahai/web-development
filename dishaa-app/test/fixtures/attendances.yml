@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student: one
+  grade: one
+  subject: one
+  date: 2017-06-26
+  present: false
+  absent: false
+  on_leave: false
+
+two:
+  student: two
+  grade: two
+  subject: two
+  date: 2017-06-26
+  present: false
+  absent: false
+  on_leave: false
